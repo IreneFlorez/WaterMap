@@ -45,13 +45,12 @@ for js in external_js:
 #app Layout
 app.layout = html.Div(style=colors,children=[
     html.H1(children='water visualization',style={'textAlign':'center'}),
-html.Div(style={'textAlign':'center'},children='''
+    html.Div(style={'textAlign':'center'},children='''
      Built with Dash: A web application framework for Python.
-    ''')
-])
+    '''),
 
-#scatterplot
-dcc.Graph(
+    #scatterplot
+    dcc.Graph(
         id='water Viz',
         figure={
             'data': [
@@ -76,6 +75,8 @@ dcc.Graph(
             )
         }
     )
+])
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
