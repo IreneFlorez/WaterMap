@@ -36,10 +36,10 @@ def create_json_object(db_obj):
     data["last_update"] = db_obj.last_update
     return json.dumps(data)
 
-def school_info(school_name):
-    school_obj = create_school_db_obj(school_name)
-    return create_json_object(school_obj)
+def school_info_obj(school_name):
+    return create_school_db_obj(school_name)
+    #return json.loads(create_json_object(school_obj))
 
 # Test code below
-# test_json = school_info(school_1)
+# test_json = school_info_json(school_1)
 # print(json.loads(test_json))
