@@ -7,7 +7,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///schools.db'
 db = SQLAlchemy(app)
 
-df_schools= pd.read_csv('pubschls.txt', sep="\t")
+# Uncomment if need to recreate database
+#df_schools= pd.read_csv('pubschls.txt', sep="\t")
 
 class School(db.Model):
     __tablename__ = 'schools'
