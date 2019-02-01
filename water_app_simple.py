@@ -25,10 +25,9 @@ app = dash.Dash()
 header_names =[ 'SchoolName', 'SchoolCounty', 'RESULT', 'class']
 df = pd.read_csv('./filtered.csv', names=header_names)
 
-#Internal CSS
 colors = {
          'background': '#0000FF',
-         'color': '#FFA500'
+         'color': '#FFA500'}
 
 #External CSS
 external_css = ["https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
@@ -36,14 +35,14 @@ external_css = ["https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awe
 for css in external_css:
     app.css.append_css({"external_url": css})
 
-#External JavaScript
+#External JS
 external_js = ["http://code.jquery.com/jquery-3.3.1.min.js",
                "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"]
 for js in external_js:
     app.scripts.append_script({"external_url": js})
 
-}
-#Our app's Layout
+
+#app Layout
 app.layout = html.Div(style=colors,children=[
     html.H1(children='water visualization',style={'textAlign':'center'}),
 html.Div(style={'textAlign':'center'},children='''
@@ -51,8 +50,7 @@ html.Div(style={'textAlign':'center'},children='''
     ''')
 ])
 
-
-
+#scatterplot
 dcc.Graph(
         id='water Viz',
         figure={
