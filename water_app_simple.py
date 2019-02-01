@@ -22,8 +22,8 @@ import plotly.graph_objs as go
 
 app = dash.Dash()
 
-header_names =[ 'SchoolName', 'SchoolCounty', 'RESULT', 'class']
-df = pd.read_csv('./filtered.csv', names=header_names)
+#header_names =[ 'SchoolName', 'SchoolCounty', 'RESULT',]
+df = pd.read_csv('./filtered.csv', header=0)
 
 colors = {
          'background': '#0000FF',
@@ -55,8 +55,8 @@ app.layout = html.Div(style=colors,children=[
         figure={
             'data': [
                 go.Scatter(
-                    x=df[df['class'] == i]['SchoolName'],
-                    y=df[df['class'] == i]['RESULT'],
+                    x=df[df['SchoolCounty'] == i]['SchoolName'],
+                    y=df[df['SchoolCounty'] == i]['RESULT'],
                     mode='markers',
                     opacity=0.7,
                     marker={
@@ -64,7 +64,7 @@ app.layout = html.Div(style=colors,children=[
                         'line': {'width': 0.5, 'color': 'white'}
                     },
                     name=i
-                ) for i in df['class'].unique()
+                ) for i in df['SchoolCounty'].unique()
             ],
             'layout': go.Layout(
                 xaxis={'title': 'SchoolName'},
