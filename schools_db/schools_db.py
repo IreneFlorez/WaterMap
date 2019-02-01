@@ -32,31 +32,33 @@ class School(db.Model):
     admin_email = db.Column(db.String)
     last_update = db.Column(db.String)
 
-db.create_all()
+# Uncomment below if db needs to be recreated
+# db.drop_all()
+# db.create_all()
 
-for row in range(len(df_schools[:-1])):
-    s = df_schools.loc[row,:].values.tolist()
-    db.session.add(
-            School(
-                cds_code_id = s[0],
-                nces_dist_id = s[1],
-                nces_school_id = s[2],
-                status = s[3],
-                county = s[4],
-                district = s[5],
-                school = s[6],
-                street = s[7],
-                city = s[9],
-                zip = s[10],
-                state = s[11],
-                address = s[12],
-                phone = s[17],
-                web = s[19],
-                admin_first_name = s[39],
-                admin_last_name = s[40],
-                admin_email = s[41],
-                last_update = s[48]
-            )
-        )
+# for row in range(len(df_schools[:-1])):
+#     s = df_schools.loc[row,:].values.tolist()
+#     db.session.add(
+#             School(
+#                 cds_code_id = s[0],
+#                 nces_dist_id = s[1],
+#                 nces_school_id = s[2],
+#                 status = s[3],
+#                 county = s[4],
+#                 district = s[5],
+#                 school = s[6],
+#                 street = s[7],
+#                 city = s[9],
+#                 zip = s[10],
+#                 state = s[11],
+#                 address = s[12],
+#                 phone = s[17],
+#                 web = s[19],
+#                 admin_first_name = s[39],
+#                 admin_last_name = s[40],
+#                 admin_email = s[41],
+#                 last_update = s[48]
+#             )
+#         )
 
-db.session.commit()
+# db.session.commit()
