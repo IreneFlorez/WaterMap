@@ -50,18 +50,8 @@ external_js = ["http://code.jquery.com/jquery-3.3.1.min.js",
 for js in external_js:
     app.scripts.append_script({"external_url": js})
 
-def generate_table(dataframe, max_rows=10):
-    return html.Table(
-        # Header
-        [html.Tr([html.Th(col) for col in dataframe.columns])] +
-
-        # Body
-        [html.Tr([
-            html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
-        ]) for i in range(min(len(dataframe), max_rows))]
-    )
-
-#app Layout
+selected = ["ID", "WaterSystemCounty", "SchoolName", "RESULT"]
+        
 
 app.layout = html.Div(
     children =
@@ -105,17 +95,19 @@ app.layout = html.Div(
         value=df['RESULT'].min(),
         marks={str(RESULT): str(RESULT) for RESULT in df['RESULT'].unique()}
         ),
-        #table
-        html.H1(children='Data Table',
-                style={'textAlign':'center'}
-                ),
-        generate_table(df),
+
         
         #styled table
         dash_table.DataTable(
             id='table',
-            columns=[{"ID": i, "WaterSystemCounty": i, "SchoolName": i, "RESULT": i} for i in df.columns],
+            columns=[
+                {"id": i,
+                 "name": i} 
+                 for i in df.columns if i in selected],
             data=df.to_dict("rows"),
+            # row_selectable=True,
+            # filterable=True,
+            # sortable=True,
             style_table={
                 'maxHeight': '300px',
                 'overflowY': 'scroll',
@@ -124,9 +116,9 @@ app.layout = html.Div(
             style_cell={
                 'minWidth': '0px', 
                 'maxWidth': '180px',
-                'whiteSpace': 'normal'
-                #'whiteSpace': 'no-wrap',
-                #'textOverflow': 'ellipsis',
+                'whiteSpace': 'normal',
+                'whiteSpace': 'no-wrap',
+                'textOverflow': 'ellipsis',
             },
             css=[{
                 'selector': '.dash-cell div.dash-cell-value',
@@ -134,27 +126,27 @@ app.layout = html.Div(
             }],
             style_cell_conditional=[
                 {'if': {'column_id': 'ID'},
-                'width': '30%'},
+                'width': '5%'},
                 {'if': {'column_id': 'Temperature'},
-                'width': '30%'},
+                'width': '35%'},
                 {'if': {'column_id': 'WaterSystemCounty'},
-                'width': '30%'},
+                'width': '25%'},
                 {'if': {'column_id': 'SchoolName'},
                 'width': '30%'},
                 {'if': {'column_id': 'RESULT'},
-                'width': '30%'},
-            ] 
+                'width': '25%'}, 
+            ]
         ),
 
         #coming soon - map,
-       """  dcc.Checklist(
-            options=[
-                {'label': 'New York City', 'value': 'NYC'},
-                {'label': u'Montréal', 'value': 'MTL'},
-                {'label': 'San Francisco', 'value': 'SF'}
-            ],
-            values=['MTL', 'SF']
-        ),  """
+        # dcc.Checklist(
+        #     options=[
+        #         {'label': 'New York City', 'value': 'NYC'},
+        #         {'label': u'Montréal', 'value': 'MTL'},
+        #         {'label': 'San Francisco', 'value': 'SF'}
+        #     ],
+        #     values=['MTL', 'SF']
+        # ), 
 ]
 
 )
