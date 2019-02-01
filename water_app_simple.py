@@ -1,5 +1,5 @@
 """ 
-base items to install on the computer
+TO DO: move these to a requirements.txt file
 
 pip install dash==0.21.1 # The core dash backend
 pip install dash-renderer==0.12.1 # The dash front-end
@@ -17,6 +17,7 @@ pip install plotly --upgrade
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.dependencies import Input, Output
 import pandas as pd
 import plotly.graph_objs as go
 
@@ -24,6 +25,8 @@ app = dash.Dash()
 
 #header_names =[ 'SchoolName', 'SchoolCounty', 'RESULT',]
 df = pd.read_csv('./filtered.csv', header=0)
+#filter the data frame here ... 
+df= df[df.RESULT>5]
 
 colors = {
          'background': '#0000FF',
@@ -43,40 +46,42 @@ for js in external_js:
 
 
 #app Layout
-app.layout = html.Div(style=colors,children=[
-    html.H1(children='water visualization',style={'textAlign':'center'}),
-    html.Div(style={'textAlign':'center'},children='''
-     Built with Dash: A web application framework for Python.
-    '''),
+app.layout = html.Div(style=colors,children=
+    [
+    html.H1(children='water visualization',
+            style={'textAlign':'center'}),
+    html.Div(style={'textAlign':'center'},
+            children='''
+            Built with Dash, a web app framework for Python.
+            '''),
 
-    #scatterplot
-    dcc.Graph(
-        id='water Viz',
-        figure={
-            'data': [
-                go.Scatter(
-                    x=df[df['SchoolCounty'] == i]['SchoolName'],
-                    y=df[df['SchoolCounty'] == i]['RESULT'],
-                    mode='markers',
-                    opacity=0.7,
-                    marker={
-                        'size': 15,
-                        'line': {'width': 0.5, 'color': 'white'}
-                    },
-                    name=i
-                ) for i in df['SchoolCounty'].unique()
-            ],
-            'layout': go.Layout(
-                xaxis={'title': 'SchoolName'},
-                yaxis={'title': 'RESULT'},
-                margin={'l': 200, 'b': 40, 't': 100, 'r': 200},
-                legend={'x': 0, 'y': 1},
-                hovermode='closest'
-            )
-        }
-    )
+        #scatterplot
+        dcc.Graph(
+            id='water Viz',
+            figure={
+                'data': [
+                    go.Scatter(
+                        x=df[df['SchoolCounty'] == i]['SchoolName'],
+                        y=df[df['SchoolCounty'] == i]['RESULT'],
+                        mode='markers',
+                        opacity=0.7,
+                        marker={
+                            'size': 15,
+                            'line': {'width': 0.5, 'color': 'white'}
+                        },
+                        name=i
+                    ) for i in df['SchoolCounty'].unique()
+                ],
+                'layout': go.Layout(
+                    xaxis={'title': 'SchoolName'},
+                    yaxis={'title': 'RESULT'},
+                    margin={'l': 200, 'b': 40, 't': 100, 'r': 200},
+                    legend={'x': 0, 'y': 1},
+                    hovermode='closest'
+                )
+            }
+        )
 ])
-
 
 if __name__ == '__main__':
     app.run_server(debug=True)
