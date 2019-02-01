@@ -1,0 +1,8 @@
+<form action="/filter">
+<select name="county">
+    {% for county in counties %}
+        <option value = "{{county}}" > {{ county }}</otpion>
+    {% endfor %}
+</select>
+<input type= "submit" value = "Select School County">
+</form>
