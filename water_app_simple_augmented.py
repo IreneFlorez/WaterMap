@@ -1,14 +1,4 @@
-""" 
-TO DO: move these to a requirements.txt file
 
-pip install dash==0.21.1 # The core dash backend
-pip install dash-renderer==0.12.1 # The dash front-end
-pip install dash-html-components==0.10.1 # HTML components
-pip install dash-core-components==0.22.1 # Supercharged components
-pip install dash-table==3.1.11
-pip install plotly --upgrade 
-
-"""
 #Resources: Basic Tutorials
 #https://medium.freecodecamp.org/this-quick-intro-to-dash-will-get-you-to-hello-world-in-under-5-minutes-86f8ae22ca27
 #https://www.datacamp.com/community/tutorials/learn-build-dash-python
