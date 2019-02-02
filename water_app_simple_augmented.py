@@ -1,14 +1,3 @@
-""" 
-TO DO: move these to a requirements.txt file
-
-pip install dash==0.21.1 # The core dash backend
-pip install dash-renderer==0.12.1 # The dash front-end
-pip install dash-html-components==0.10.1 # HTML components
-pip install dash-core-components==0.22.1 # Supercharged components
-pip install dash-table==3.1.11
-pip install plotly --upgrade 
-
-"""
 #Resources: Basic Tutorials
 #https://medium.freecodecamp.org/this-quick-intro-to-dash-will-get-you-to-hello-world-in-under-5-minutes-86f8ae22ca27
 #https://www.datacamp.com/community/tutorials/learn-build-dash-python
@@ -24,6 +13,14 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import plotly.graph_objs as go
 
+import plotly
+import plotly.plotly as py
+import plotly.figure_factory as ff
+
+import numpy as np
+import pandas as pd
+
+import os
 
 
 #header_names =[ 'SchoolName', 'SchoolCounty', 'RESULT',]
@@ -96,7 +93,6 @@ app.layout = html.Div(
         marks={str(RESULT): str(RESULT) for RESULT in df['RESULT'].unique()}
         ),
 
-        
         #styled table
         dash_table.DataTable(
             id='table',
@@ -138,11 +134,24 @@ app.layout = html.Div(
             ]
         ),
 
+        #TEST
+        # html.Div(style={'textAlign':'center'},
+        #     html.H1(children='Take Action'),
+        #     html.P(children=school.school),
+        #     html.P(children=school.county + " County"),
+        #     html.P(children=school.district + " School District"),
+        #     html.P(children=school.admin_first_name + " "+ school.admin_last_name),
+        #     html.P(children=school.admin_email)
+        #     )
+
+
+        #),
+
         #coming soon - map,
         # dcc.Checklist(
         #     options=[
         #         {'label': 'New York City', 'value': 'NYC'},
-        #         {'label': u'Montréal', 'value': 'MTL'},
+        #         {'label': u'Montreal', 'value': 'MTL'},
         #         {'label': 'San Francisco', 'value': 'SF'}
         #     ],
         #     values=['MTL', 'SF']
